@@ -1,4 +1,4 @@
-name: Flask CI/CD
+name: Portoweb CI/CD
 
 on:
   push:
