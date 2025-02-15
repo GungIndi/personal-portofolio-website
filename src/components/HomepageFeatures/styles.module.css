@@ -1,0 +1,32 @@
+.projects {
+  padding: 2rem 0;
+}
+
+.projectHeading {
+  margin-bottom: 2.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.projectImg {
+  width: 100%;
+  height: 200px;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  height: 2.5em;
+}
+
+.projectDescription {
+  font-size: 1rem;
+  color: #666;
+  text-align: justify;
+  margin-bottom: 2em;
+}
