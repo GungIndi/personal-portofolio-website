@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-description: Workflow files for python app.
+description: Workflow files for Node.Js app.
 ---
 
 # Node Js Workflows

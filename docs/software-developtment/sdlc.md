@@ -2,7 +2,7 @@
 
 The **Software Development Life Cycle (SDLC)** outlines the structured process for creating software applications. It consists of the following stages:
 
-![](../../static/img/sdlc.png)
+![sdlc-dicoding-image](../../static/img/sdlc.png)
 
 1. **Planning** – Defining the project scope and objectives.
 2. **Analysis** – Gathering and analyzing requirements.

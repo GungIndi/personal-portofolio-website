@@ -1,0 +1,8 @@
+{
+  "label": "📂 Kubernetes",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Personal Kubernetes Documentation."
+  }
+}
