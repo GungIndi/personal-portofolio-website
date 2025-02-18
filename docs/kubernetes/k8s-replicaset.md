@@ -6,7 +6,7 @@ sidebar_position: 7
 
 A ReplicaSet guarantees that a certain number of pod replicas are running at all times. However, a Deployment is a more advanced concept that oversees ReplicaSets and offers declarative updates to Pods, along with many other valuable features. As a result, **it's generally recommended to use Deployments rather than directly working with ReplicaSets**, unless you need specific update control or don't need updates at all.
 
-## Deployments Manifest File
+## ReplicaSet Manifest File
 
 ```yaml title='replicaset.yaml'
 apiVersion: apps/v1

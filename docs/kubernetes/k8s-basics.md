@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Kubernetes Basics
+# Kubernetes Architecture
 
 ![k8s-architecture-dicoding-image](../../static/img/k8s-architecture.png)
 

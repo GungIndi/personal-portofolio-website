@@ -28,10 +28,12 @@ metadata:
   name: webserver
 spec: 
   ports:
-    - port: 80
-  selector:         # assign app selector to connect with service
+    - targetPort: 80  # (Optional) Port that the backend expose; default will follow what `port:` specified
+      port: 80        # Port that the service expose
+      nodePort: 30008 # Port that Node will expose (30000 - 32767); default will assign automatic range that available
+  selector:           # (Optional) assign app selector to connect with service
     app: webserver
-  type: NodePort    # assign the type
+  type: NodePort      # assign the type
 ```
 
 After make the manifest file, we apply the manifest to create the service
