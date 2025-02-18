@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Deployment
@@ -55,6 +55,20 @@ kubectl apply -f deployment.yaml
 Then check the deployment
 
 ```bash
-# Get pods
-kubectl get pods -n [NAMESPACE]
+# Get Deployment
+kubectl get deployment -n [NAMESPACE]
+```
+
+in deployment we can do `Rollout` and `Rollback`
+
+```bash
+# Rollout Restart (Triggers a rolling restart)
+kubectl rollout restart deployment [DEPLOYMENT_NAME] -n [NAMESPACE]
+
+# Rollback to the previous revision
+kubectl rollout undo deployment [DEPLOYMENT_NAME] -n [NAMESPACE]
+
+# Rollback to a specific revision (optional)
+kubectl rollout undo deployment [DEPLOYMENT_NAME] --to-revision=[REVISION] -n [NAMESPACE]
+
 ```

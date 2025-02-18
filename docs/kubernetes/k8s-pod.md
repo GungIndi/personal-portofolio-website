@@ -28,6 +28,15 @@ spec:
         cpu: "500m"
     ports:
       - containerPort: 80
+    securityContext:
+        allowPrivilegeEscalation: false
+        privileged: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+    runAsUser: 1001
+    runAsGroup: 1001
+    runAsNonRoot: true
 ```
 
 After make the manifest file, we apply the manifest to create the pod
@@ -41,6 +50,9 @@ Then check the pod
 ```bash
 # Get pods
 kubectl get pods
+
+# Get pods with extra information
+kubectl get pods -o wide
 
 # Get know more deep
 kubectl describe pod [POD_NAME]

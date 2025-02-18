@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 6
 ---
 
 # ReplicaSet
@@ -37,12 +37,12 @@ spec:
 After make the manifest file, we apply the manifest to create deployment
 
 ```bash
-kubectl apply -f deployment.yaml
+kubectl apply -f replicaset.yaml
 ```
 
 Then check the deployment
 
 ```bash
 # Get pods
-kubectl get pods -n [NAMESPACE]
+kubectl get rs -n [NAMESPACE]
 ```

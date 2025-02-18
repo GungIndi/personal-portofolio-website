@@ -27,13 +27,14 @@ metadata:
     app: webserver
   name: webserver
 spec: 
+  type: NodePort      # Load Balancer type will only work if cluster is configured to provision one from an external source (e.g. cloud provider)
   ports:
-    - targetPort: 80  # (Optional) Port that the backend expose; default will follow what `port:` specified
+    - protocol: TCP
       port: 80        # Port that the service expose
+      targetPort: 80  # (Optional) Port that the backend expose; default will follow what `port:` specified
       nodePort: 30008 # Port that Node will expose (30000 - 32767); default will assign automatic range that available
   selector:           # (Optional) assign app selector to connect with service
     app: webserver
-  type: NodePort      # assign the type
 ```
 
 After make the manifest file, we apply the manifest to create the service
@@ -45,8 +46,8 @@ kubectl apply -f service.yaml
 Then check the service
 
 ```bash
-# Get pods
-kubectl get pods
+# Get Service
+kubectl get service
 
 # Get know more detail
 kubectl describe service [SERVICE_NAME]
