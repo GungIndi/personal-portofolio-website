@@ -40,7 +40,7 @@ kubectl apply -f daemonset.yaml
 Then check the daemonset that have been created
 
 ```bash
-# Get cronjobs
+# Get daemonset
 kubectl get ds
 
 # Get daemonset pods that spread accross worker node

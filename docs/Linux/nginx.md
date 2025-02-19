@@ -112,3 +112,20 @@ server {
     }
 }
 ```
+
+### VirtualHost for Multiple Website in NGINX
+
+```sh title='/etc/nginx/nginx.conf'
+# request to example1.com go to /var/www/example1
+server {
+    listen 80;
+    server_name example1.com;
+    root /var/www/example1;
+}
+# request to example2.com go to /var/www/example2
+server {
+    listen 80;
+    server_name example2.com;
+    root /var/www/example2;
+}
+```

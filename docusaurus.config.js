@@ -115,7 +115,7 @@ const config = {
         ],
       },
       prism: {
-        additionalLanguages: ['bash', 'yaml', 'docker'],
+        additionalLanguages: ['hcl','bash', 'yaml', 'docker'],
         theme: prismThemes.dracula,
         darkTheme: customDarkTheme,
       },
