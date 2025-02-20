@@ -75,16 +75,51 @@ provider "google" {
 
 ### Variables
 - Allow flexible configurations without modifying source code.
-
-```hcl
+1. **Defines Variables**
+```hcl title='variable.tf'
+# String
 variable "bucket_name" {
-  description = "Bucket name"
+  description = "Name of the S3 bucket"
   type        = string
 }
-
-resource "google_storage_bucket" "example" {
-  name     = var.bucket_name
-  location = "US"
+# List
+variable "instance_types" {
+  type    = list(string)
+  default = ["t2.micro", "t3.micro"]
+}
+# Map
+variable "storage_type" {
+  type = map(string)
+  default = {
+    standard = "gp2"
+    high     = "io1"
+  }
+}
+# Set
+variable "team_members" {
+  type    = set(string)
+  default = ["alice", "bob", "charlie", "dave"]
+}
+```
+2. **Using Variables**
+```hcl
+# Use string
+resource "aws_s3_bucket" "example" {
+  bucket = var.bucket_name
+}
+# Use map var with for_each 
+resource "aws_instance" "example" {
+  for_each      = var.storage_type
+  ami           = "ami-12345678"
+  instance_type = each.value
+  tags = {
+    Name = each.key
+  }
+}
+# Use set var with for_each 
+resource "aws_iam_user" "team" {
+  for_each = var.team_members
+  name     = each.value
 }
 ```
 
