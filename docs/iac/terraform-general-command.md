@@ -43,6 +43,10 @@ sidebar_position: 2
   ```sh
   terraform destroy -auto-approve
   ```
+- Remove resources that were deleted outside Terraform:
+  ```sh
+  terraform refresh
+  ```
 
 ### Resource & State Management
 - Show Terraform state:
@@ -64,6 +68,10 @@ sidebar_position: 2
 - Import an existing resource into Terraform state:
   ```sh
   terraform import <resource_type>.<resource_name> <resource_id>
+  ```
+- Refresh terraform state to match real-world infrastructure:
+  ```sh
+  terraform refresh
   ```
 
 ### Output & Variables Management
