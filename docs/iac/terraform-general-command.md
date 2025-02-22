@@ -73,6 +73,14 @@ sidebar_position: 2
   ```sh
   terraform refresh
   ```
+- Mark a resource for recreation:
+  ```sh
+  terraform taint <resource_type>.<resource_name>
+  ```
+- Remove the taint from a resource:
+  ```sh
+  terraform untaint <resource_type>.<resource_name>
+  ```
 
 ### Output & Variables Management
 - View Terraform outputs:

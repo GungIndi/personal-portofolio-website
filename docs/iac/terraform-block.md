@@ -71,8 +71,13 @@ variable "team_members" {
 resource "aws_s3_bucket" "example" {
   bucket = var.bucket_name
 }
+# Use list with count
+resource "aws_instance" "example1"{
+  count = length(var.instance_types)
+  instance_type = var.instance_types[count.index]
+}
 # Use map var with for_each 
-resource "aws_instance" "example" {
+resource "aws_instance" "example2" {
   for_each      = var.storage_type
   ami           = "ami-12345678"
   instance_type = each.value
