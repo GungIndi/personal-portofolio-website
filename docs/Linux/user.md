@@ -35,13 +35,6 @@ sudo userdel [USER] # Delete user account
 sudo userdel -r [USER] # Delete user and their home directory
 ```
 
-### Change Ownership
-```bash
-sudo chown [USER] [FILE] # Change ownership of a file to a specific user
-sudo chown :[GROUP] [FILE] # Change group ownership of a file
-sudo chown [USER]:[GROUP] [FILE] # Change user and group ownership of a file
-```
-
 ## Sudoers Management
 
 The `sudoers` file controls which users have permission to run commands as **root** or other privileged users. The file is located at `/etc/sudoers`. To **edit** the sudoers file safely, use:
