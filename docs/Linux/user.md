@@ -10,6 +10,7 @@ regular `users` have limitations imposed by the administrators. Administrators c
 
 Here is how administrators (`root`) can manipulate `users` in Linux. 
 
+## Manipulating User
 ### Add User
 
 ```bash
@@ -40,3 +41,29 @@ sudo chown [USER] [FILE] # Change ownership of a file to a specific user
 sudo chown :[GROUP] [FILE] # Change group ownership of a file
 sudo chown [USER]:[GROUP] [FILE] # Change user and group ownership of a file
 ```
+
+## Sudoers Management
+
+The `sudoers` file controls which users have permission to run commands as **root** or other privileged users. The file is located at `/etc/sudoers`. To **edit** the sudoers file safely, use:
+
+```bash
+sudo visudo
+```
+
+### Configuring Passwordless Sudo
+Add this line to the sudoers file to make user run commands with sudo without password
+```bash
+# Allow a specific user to run sudo commands without entering a password
+[USER] ALL=(ALL) NOPASSWD: ALL
+# Allow a specific user to run specific commands with sudo commands without entering a password
+[USER] ALL=(ALL) NOPASSWD: /usr/bin/dnf # example command
+# Allow a specific group to run specific commands with sudo without a password:
+%devs ALL=(ALL) NOPASSWD: /usr/bin/dnf  # example comand
+```
+
+### Checking Sudo Privileges
+To check if a user has sudo privileges:
+```bash
+sudo -l -U [USER]
+```
+
