@@ -4,13 +4,73 @@ sidebar_position: 3
 
 # Docker Log
 
-### Log Driver in Docker
+Docker supports multiple log drivers for handling container logs. The log driver determines how and where logs are stored.
+
+## Check container logs in the docker directory
+```sh
+sudo cat /var/lib/docker/containers/[CONTAINER]/*-json.log
+```
+
+## Log Rotation
+
+Configuring log rotation can preven your system from running out of storage, docker logs that are generated in fast period of time often created so much log and if u're not aware, it can be multiple times bigger than the size of your apps
+
+Here's how you can configure log rotation for `json-file` log driver.
+
+### Configuring in docker `daemon.json`
+
+  1. Create or edit daemon.json file
+```sh
+sudo vi /etc/docker/daemon.json
+```
+  2. Configure daemon.json file
+```json title='/etc/docker/daemon.json'
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "100"
+  }
+}
+```
+
+  3. Restart docker
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+### Configuring with Docker Run
+  1. Just docker run
+```sh
+docker run \
+// highlight-start
+--log-driver=json-file \
+--log-opt max-size=10m \
+// highlight-end
+[IMAGE]
+```
+
+### Configuring in `docker-compose.yaml`
+```yaml title='docker-compose.yaml'
+services:
+  app:
+    image: [IMAGE]
+    // highlight-start
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    // highlight-end
+```
+
+## Log Driver in Docker
 
 |**Driver**|**Description**|
 |---|---|
 |**none**|No logs are available for the container and `docker logs` does not return any output.|
 |**local**|Logs are stored in a custom format designed for minimal overhead.|
-|**json-file**|The logs are formatted as JSON. The default logging driver for Docker.|
+|**json-file**|The logs are formatted as JSON. The `default` logging driver for Docker.|
 |**syslog**|Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.|
 |**journald**|Writes log messages to `journald`. The `journald` daemon must be running on the host machine.|
 |**gelf**|Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.|
@@ -21,28 +81,9 @@ sidebar_position: 3
 |**gcplogs**|Writes log messages to Google Cloud Platform (GCP) Logging.|
 |**logentries**|Writes log messages to Rapid7 Logentries.|
 
+### Log driver with Splunk Example
+
 ```sh
-# Create and Use Json-file Log Driver
-sudo vim /etc/docker/daemon.json
-...
-{
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "100"
-  }
-}
-...
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-docker run \
---log-driver json-file \
---log-opt max-size=10m \
-[IMAGE]
-
-# Check logs in the docker directory
-sudo cat /var/lib/docker/containers/[CONTAINER]/xxx-json.log
-
 # Run Docker with Splunk Log Driver
 docker run \
 --log-driver=splunk \
@@ -52,3 +93,5 @@ docker run \
 --log-opt splunk-source=docker \
 --log-opt splunk-sourcetype=_json \
 [IMAGE]
+```
+
