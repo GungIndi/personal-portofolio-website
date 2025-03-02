@@ -32,40 +32,6 @@ sudo chown :[GROUP] [FILE] # Change group ownership of a file
 sudo chown [USER]:[GROUP] [FILE] # Change user and group ownership of a file
 ```
 
-
----
-sidebar_position: 4
----
-
-# File Permissions
-
-Linux file permissions control access to files and directories.
-
-## Permission Levels
-```bash
-rw------- 600  # Owner can read/write (private files)
-rw-r--r-- 644  # Owner can read/write, others can read
-rwxr-xr-x 755  # Owner can read/write/execute, others can read/execute
-rwx------ 700  # Owner can read/write/execute (private script)
-rw-rw-r-- 664  # Owner and group can read/write, others can read
-```
-
-## Setting Permissions
-```bash
-chmod 600 file.txt  # Private file  
-chmod 644 file.txt  # Readable by others  
-chmod 755 script.sh # Executable by others  
-chmod 700 secret.sh # Private script  
-chmod 664 shared.txt # Shared file  
-```
-
-## Changing Ownership
-```bash
-sudo chown [USER] [FILE]       # Change owner  
-sudo chown :[GROUP] [FILE]     # Change group  
-sudo chown [USER]:[GROUP] [FILE] # Change both  
-```
-
 ## Sticky Bit (`t` Permission)
 The **sticky bit** prevents users from deleting others’ files in a shared directory.
 
