@@ -10,6 +10,34 @@ regular `users` have limitations imposed by the administrators. Administrators c
 
 Here is how administrators (`root`) can manipulate `users` in Linux. 
 
+## Check User
+1. List all user in the system
+```sh
+cat /etc/passwd
+```
+2. List curently logged-in user
+```sh
+who # show simple output
+w   # include uptime, load, and what users are doing
+```
+3. Check user group
+```sh
+groups [USERNAME]
+```
+4. Show group membership of current user
+```sh
+id
+```
+5. Find Logged-In Users History
+```sh
+last [USERNAME]
+```
+6. Check if user exist
+```sh
+genent passwd [USERNAME]
+```
+
+
 ## Manipulating User
 ### Add User
 

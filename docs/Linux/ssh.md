@@ -24,6 +24,40 @@ ssh-copy-id -i [PUB_KEY_FILE] username@remote_host
 # Connect to Remote Server
 ssh -i [PRIVATE_KEY_FILE] username@remote_host 
 ```
+
+## Restrict SSH Access Using PAM
+
+For example, I want to allow only users in the `bolehssh` to log in via SSH. Let's configure **PAM (Plugable Authentication Module)** to make it work
+
+1. Create Group
+```sh
+sudo groupadd bolehssh
+```
+2. Add user to group
+```sh
+sudo usermod -aG bolehssh [USERNAME]
+```
+3. Configure PAM
+```sh
+# Edit the pam configuration file
+sudo nano /etc/pam.d/sshd
+
+# Add this line in the end of the file
+account required pam_access.so
+```
+4. Define Access Control in` /etc/security/access.conf`
+```sh
+# Edit the access control file
+sudo nano /etc/security/access.conf
+
+# Add this line
+-:ALL EXCEPT root sshusers:ALL
+```
+5. Restart the ssh service
+```sh
+sudo systemctl restart sshd
+```
+
 ## SSH Hardening
 
 There's some steps u can do for hardening ssh, one of them is to modify the sshd_config file, here's how u can do it
@@ -40,6 +74,9 @@ UsePAM no
 
 # Change PermitRootLogin to no
 PermitRootLogin no
+
+# Change port (optional)
+Port 2222
 
 # Reload ssh
 sudo systemctl reload ssh
