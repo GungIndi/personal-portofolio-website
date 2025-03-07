@@ -57,6 +57,9 @@ btop
 To **exit**, press `q` or `Esc`.
 
 ### **Understanding `btop` Output**
+
+![btop](../../static/img/btop.png)
+
 When you run `btop`, the interface consists of multiple sections:
 - `CPU Usage` : Displays real-time CPU usage per core, average load, and process priority usage. Includes temperature readings (if supported).
 - `Memory & Swap Usage` : Graphically represents RAM and swap usage, showing cached, free, and used memory.
