@@ -24,6 +24,17 @@ ssh-copy-id -i [PUB_KEY_FILE] username@remote_host
 # Connect to Remote Server
 ssh -i [PRIVATE_KEY_FILE] username@remote_host 
 ```
+Or, if you are a server-holic and need frequent access to remote server, you can set up easier connection by edit your `~/.ssh/config` file
+```sh title='~/.ssh/config'
+Host [REMOTE_HOST]
+    HostName [REMOTE_IP]
+    User [REMOTE_USER]
+    IdentityFile ~/.ssh/[PRIVATE_KEY] 
+```
+Now, you can simply run
+```sh
+ssh [REMOTE_HOST]
+```
 
 ## Restrict SSH Access Using PAM
 
