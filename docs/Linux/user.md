@@ -63,6 +63,52 @@ sudo userdel [USER] # Delete user account
 sudo userdel -r [USER] # Delete user and their home directory
 ```
 
+## Manipulating Groups
+
+Linux groups allow multiple users to share the same permissions. Here’s how to manage groups:
+
+### Add Group
+
+```bash
+sudo groupadd [GROUP]
+```
+
+### Modify Group
+
+```bash
+sudo groupmod -n [NEW_GROUP] [OLD_GROUP] # Rename a group
+```
+
+### Delete Group
+
+```bash
+sudo groupdel [GROUP]
+```
+
+### Add User to a Group
+
+```bash
+sudo usermod -aG [GROUP] [USER]
+```
+
+### Remove User from a Group
+
+```bash
+sudo gpasswd -d [USER] [GROUP]
+```
+
+### List Groups
+
+```bash
+cat /etc/group # Show all groups
+```
+
+### Show User's Group Membership
+
+```bash
+groups [USER]
+```
+
 ## Sudoers Management
 
 The `sudoers` file controls which users have permission to run commands as **root** or other privileged users. The file is located at `/etc/sudoers`. To **edit** the sudoers file safely, use:
