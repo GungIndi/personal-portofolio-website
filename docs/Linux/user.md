@@ -67,46 +67,13 @@ sudo userdel -r [USER] # Delete user and their home directory
 
 Linux groups allow multiple users to share the same permissions. Here’s how to manage groups:
 
-### Add Group
-
 ```bash
-sudo groupadd [GROUP]
-```
-
-### Modify Group
-
-```bash
+sudo groupadd [GROUP]                    # Add Group
 sudo groupmod -n [NEW_GROUP] [OLD_GROUP] # Rename a group
-```
-
-### Delete Group
-
-```bash
-sudo groupdel [GROUP]
-```
-
-### Add User to a Group
-
-```bash
-sudo usermod -aG [GROUP] [USER]
-```
-
-### Remove User from a Group
-
-```bash
-sudo gpasswd -d [USER] [GROUP]
-```
-
-### List Groups
-
-```bash
-cat /etc/group # Show all groups
-```
-
-### Show User's Group Membership
-
-```bash
-groups [USER]
+sudo groupdel [GROUP]                    # Delete group
+sudo gpasswd -d [USER] [GROUP]           # Remove user from group
+cat /etc/group                           # Show all groups
+groups [USER]                            # Show User's Group Membership
 ```
 
 ## Sudoers Management
