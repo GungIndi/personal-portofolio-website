@@ -33,13 +33,18 @@ COPY . .
 # Ensure .env exists
 RUN cp .env.example .env || true
 
-# Set correct permissions
-RUN chmod -R 775 storage bootstrap/cache && \
-    chown -R www-data:www-data storage bootstrap/cache
-
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+# Set correct permissions
+RUN chown -R www-data:www-data /var/www && \
+    find /var/www/ -type d -exec chmod 755 {} \; && \
+    find /var/www/ -type f -exec chmod 644 {} \; && \
+    chmod -R 775 storage bootstrap/cache database
+
+# Switch to www-data user
+USER www-data
+    
 # Generate application key
 RUN php artisan key:generate
 
@@ -48,6 +53,12 @@ EXPOSE 9000
 
 # Start PHP-FPM
 CMD ["php-fpm"]
+
+
+# Below is Optional if you want to add startup script
+# COPY start.sh /start.sh
+# RUN chmod 755 /start.sh
+# ENTRYPOINT [ "./start.sh" ]
 ```
 
 
