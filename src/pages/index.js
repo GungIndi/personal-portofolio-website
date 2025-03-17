@@ -101,7 +101,7 @@ function AboutpageContent(){
                 </a>
               </li>
 							<li>
-                <a href="file/CV Anak Agung Indi Kusuma Putra.pdf"class="btn btn-download download-cv" download>
+                <a href="https://drive.google.com/file/d/1HEnEpdMRxBBpkW7V8ojQcrRsR5aoLLpI/view?usp=sharing"class="btn btn-download download-cv" download>
                 <i className="fas fa-file-download"></i>  Download CV
                 </a>
               </li>
