@@ -64,7 +64,13 @@ CMD ["php-fpm"]
 ## How to
 
 ### Identify Laravel Requirements
-1. PHP version and library Check `composer.json` → `require.php`, or `php -v`, or `composer show --platform`)
+#### 1. PHP version and library
+Check `composer.json` → `require.php` or run command below
+```sh
+php -v
+composer show --platform
+```
+
 | PHP Extension (`docker-php-ext-install`) | System Library (`apt-get install`) |
 |-----------------------------------------|-----------------------------------|
 | `pdo_pgsql`                             | `libpq-dev`                        |
@@ -73,7 +79,7 @@ CMD ["php-fpm"]
 | `xml`                                   | `libxml2-dev`                      |
 | `intl`                                  | `libicu-dev`                        |
 
-2. PHP extensions
+#### 2. PHP extensions
 script to know what extensions needed: 
 ```sh
 #!/bin/bash
@@ -98,10 +104,13 @@ done
 
 echo ""
 ```
-3. Run `composer install` and note missing extensions, Or Just copy your composer.json & .lock, then ask GPT
-4. Database (MySQL, PostgreSQL, SQLite, etc.)
-5. Web server (Nginx or Apache)
-6. Dependencies (Node.js, npm/Yarn, Composer, Redis, etc.)
+
+:::tip Pros
+You don’t need to install all extensions manually, as the PHP Docker image usually includes some by default. You can check it with `docker run -it --rm [PHP_IMAGE] php -m`
+:::
+
+#### 3. Trial and error
+Run `composer install` and note missing extensions, Or Just copy your composer.json & .lock, then ask GPT
 
 
 ### Select Base Image
