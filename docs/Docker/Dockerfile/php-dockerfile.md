@@ -66,8 +66,32 @@ CMD ["php-fpm"]
 
 ### Identify Laravel Requirements
 1. PHP version and extensions (Check `composer.json` → `require.php`, or `php -v`, or `composer show --platform`)
-2. PHP extensions (Run `composer install` and note missing extensions)
-3. Or Just copy your composer.json, and then ask GPT
+2. PHP extensions
+script to know what extensions needed: 
+```sh
+#!/bin/bash
+
+# Make sure composer.lock file exist
+if [ ! -f "composer.lock" ]; then
+    echo "Error: composer.lock not found!"
+    exit 1
+fi
+
+echo ""
+
+# Extract required PHP extensions from composer.lock
+// highlight-next-line
+EXTENSIONS=$(jq -r '.packages[].require | keys[] | select(startswith("ext-"))' composer.lock | sort -u | sed 's/"//g')
+
+echo "Required Extensions :"
+
+for EXT in $EXTENSIONS; do
+  echo "$EXT"
+done
+
+echo ""
+```
+3. Run `composer install` and note missing extensions, Or Just copy your composer.json & .lock, then ask GPT
 4. Database (MySQL, PostgreSQL, SQLite, etc.)
 5. Web server (Nginx or Apache)
 6. Dependencies (Node.js, npm/Yarn, Composer, Redis, etc.)
