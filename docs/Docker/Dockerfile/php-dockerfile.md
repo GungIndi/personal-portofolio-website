@@ -61,11 +61,18 @@ CMD ["php-fpm"]
 # ENTRYPOINT [ "./start.sh" ]
 ```
 
-
 ## How to
 
 ### Identify Laravel Requirements
-1. PHP version and extensions (Check `composer.json` → `require.php`, or `php -v`, or `composer show --platform`)
+1. PHP version and library Check `composer.json` → `require.php`, or `php -v`, or `composer show --platform`)
+| PHP Extension (`docker-php-ext-install`) | System Library (`apt-get install`) |
+|-----------------------------------------|-----------------------------------|
+| `pdo_pgsql`                             | `libpq-dev`                        |
+| `zip`                                   | `libzip-dev`                       |
+| `gd`                                    | `libpng-dev`, `libjpeg-dev`, `libfreetype6-dev` |
+| `xml`                                   | `libxml2-dev`                      |
+| `intl`                                  | `libicu-dev`                        |
+
 2. PHP extensions
 script to know what extensions needed: 
 ```sh
