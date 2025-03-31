@@ -70,6 +70,7 @@ Linux groups allow multiple users to share the same permissions. Here’s how to
 ```bash
 sudo groupadd [GROUP]                    # Add Group
 sudo groupmod -n [NEW_GROUP] [OLD_GROUP] # Rename a group
+sudo groupmod -g [NEW_GID] [GROUP]       # Change GID
 sudo groupdel [GROUP]                    # Delete group
 sudo gpasswd -d [USER] [GROUP]           # Remove user from group
 cat /etc/group                           # Show all groups
