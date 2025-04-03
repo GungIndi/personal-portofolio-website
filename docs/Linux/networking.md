@@ -8,44 +8,31 @@ Networking management in linux is a crucial to make a robust linux system. well 
 
 
 ## Checking Network Interfaces
-To check the available network interfaces, use:
 
 ```bash
-ip link show
-```
-
-Or using the deprecated `ifconfig` (requires installation on some distributions)
-
-```bash
-ifconfig -a
-```
-
-To display detailed interface information:
-
-```bash
-ip addr show
+ip link show    # Show interface
+ifconfig -a     # Deprecated
+ip addr show    # Detail interfaces information  
 ```
 
 ## Configuring Network Interfaces
-To bring up or down a network interface:
 
 ```bash
-sudo ip link set eth0 up   # Enable interface
-sudo ip link set eth0 down # Disable interface
-```
+# ip command
+sudo ip link set eth0 up        # Enable interface
+sudo ip link set eth0 down      # Disable interface
 
-For `ifconfig` users (it's deprecated bro, leave it):
-
-```bash
+# ifconfig (deprecated)
 sudo ifconfig eth0 up
 sudo ifconfig eth0 down
 ```
 
 ## Managing IP Addresses
-To assign an static IP address to an interface temporarily:
-
 ```bash
-sudo ip addr add 192.168.1.10/24 dev eth0
+ip a                                            # Check current IP
+sudo ip addr add 192.168.1.10/24 dev eth0       # Add static IP (temporal)
+sudo ip addr del 192.168.1.10/24 dev eth0       # Remove IP
+sudo dhclient eth0                              # Add dynamic IP
 ```
 
 To make changes persistent, edit the `/etc/network/interfaces` configurations (Debian based).
@@ -59,54 +46,20 @@ iface eth0 inet static
 ```
 or edit `/etc/sysconfig/network-scripts/ifcfg-eth0` if u use RHEL-based systems.
 
-To remove an IP address:
-
-```bash
-sudo ip addr del 192.168.1.10/24 dev eth0
-```
-
-To check current IP addresses:
-
-```bash
-ip a
-```
-
 ## Routing and Default Gateway
-To check routing information:
 
 ```bash
-ip route show
-```
-
-To add a default gateway:
-
-```bash
-sudo ip route add default via 192.168.1.1
-```
-
-To remove a default gateway:
-
-```bash
-sudo ip route del default
+ip route show                                   # Check routing information
+sudo ip route add default via 192.168.1.1       # Add default gateway
+sudo ip route del default                       # Remove default gateway
 ```
 
 ## Managing Network Services
-To check the status of the networking service:
 
 ```bash
-sudo systemctl status networking
-```
-
-To restart networking:
-
-```bash
-sudo systemctl restart networking
-```
-
-To enable network services at boot:
-
-```bash
-sudo systemctl enable networking
+sudo systemctl status networking        # Check networking service status
+sudo systemctl restart networking       # Restart networking service
+sudo systemctl enable networking        # Enable networking service at boot
 ```
 
 For `NetworkManager` users:
@@ -117,38 +70,12 @@ nmcli device status
 ```
 
 ## Troubleshooting Network Issues
-To check connectivity:
 
 ```bash
-ping 8.8.8.8
-```
-
-To check DNS resolution:
-
-```bash
-nslookup google.com
-```
-
-To trace network routes:
-
-```bash
-traceroute google.com
-```
-
-To analyze network traffic:
-
-```bash
-tcpdump -i eth0
-```
-
-To check open ports:
-
-```bash
-sudo netstat -tulnp
-```
-
-Or using `ss` (modern alternative):
-
-```bash
-ss -tulnp
+ping 8.8.8.8            # Check connectivity
+nslookup google.com     # Check DNS resolution
+traceroute google.com   # Trace network route
+tcpdump -i eth0         # Analyze network traffic
+sudo netstat -tulnp     # Check open ports
+ss -tulnp               # Check open ports
 ```
