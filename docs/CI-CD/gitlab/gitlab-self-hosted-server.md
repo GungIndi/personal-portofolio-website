@@ -5,8 +5,6 @@ description: Self-Hosted Gitlab Server.
 
 # Gitlab Self-Hosted Server
 
-## Run Self-Hosted Gitlab on Docker
-
 U know what? turns out we can host a Gitlab Server in our environment. This allows you to bypass the premium subscription fees by managing the server yourself. Gitlab Self-Hosted Runner can be run on various environment such as Linux and Docker environment. Here's how u can set up your own Gitlab in docker.
 
 1. Make sure to set up ur Own `DNS` and point it into the server u want to host gitlab. You can buy DNS and add SSL. Or set free DNS on [No IP](https://noip.com) and add SSL with `certbot`
@@ -50,9 +48,49 @@ U know what? turns out we can host a Gitlab Server in our environment. This allo
       sudo chmod 755 /etc/letsencrypt/live/
     ```
 
-2. Install Docker
+:::tip A Quick Note
+This guide is designed to get you up and running fast. However, it's always a better practice to understand the full process from the official [documentation](https://docs.gitlab.com/install/).
+:::
 
-3. Create Docker Compose file
+## Run Self-Hosted Gitlab on Linux
+
+Complete Documentation on [self-hosted gitlab linux](https://docs.gitlab.com/install/package/). Below is how to do it in a nutshell
+
+1. Enable firewall (22,80,443)
+
+2. Add Gitlab Package Repository
+```shell
+curl "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh" | sudo bash
+```
+3. Install Gitlab
+```shell
+# basic installation
+sudo EXTERNAL_URL="https://gitlab.gungindikusuma.xyz" apt install gitlab-ce
+
+# install gitlab with custom root credentials
+sudo GITLAB_ROOT_EMAIL="admin.example.com" GITLAB_ROOT_PASSWORD="password" EXTERNAL_URL="https://gitlab.gungindikusuma.xyz" apt install gitlab-ce
+```
+
+4. Reconfigure SSL
+```shell
+# Edit gitlab.rb files to set letsecrypt to false. Why? read the docs
+sudo nano /etc/gitlab/gitlab.rb
+letsencrypt['enable'] = false # set the variable inside gitlab.rb to this
+
+sudo nano /etc/gitlab/ssl/gitlab.gungindikusuma.xyz.crt # pem file
+sudo nano /etc/gitlab/ssl/gitlab.gungindikusuma.xyz.key # priv key file
+
+# Reconfigure gitlab
+sudo gitlab-ctl reconfigure
+```
+
+## Run Self-Hosted Gitlab on Docker
+
+Complete Documentation on [self-hosted gitlab docker](https://docs.gitlab.com/install/docker/). Below is how to do it in a nutshell
+
+1. Install Docker (of course)
+
+2. Create Docker Compose file
 ```yaml
 # docker-compose.yaml
 services:
@@ -78,7 +116,7 @@ services:
       - '/etc/ssl/<Your DNS>:/etc/ssl/<Your DNS>'
 ```
 
-4. Run Docker Compose
+3. Run Docker Compose
 ```bash
 # Run Docker Compose
 docker compose up -d
