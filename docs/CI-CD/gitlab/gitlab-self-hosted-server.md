@@ -7,6 +7,8 @@ description: Self-Hosted Gitlab Server.
 
 U know what? turns out we can host a Gitlab Server in our environment. This allows you to bypass the premium subscription fees by managing the server yourself. Gitlab Self-Hosted Runner can be run on various environment such as Linux and Docker environment. Here's how u can set up your own Gitlab in docker.
 
+## Pre-requisites
+
 1. Make sure to set up ur Own `DNS` and point it into the server u want to host gitlab. You can buy DNS and add SSL. Or set free DNS on [No IP](https://noip.com) and add SSL with `certbot`
  
     - Set up ur TLS with certbot by following the instruction below
